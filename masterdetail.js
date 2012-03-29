@@ -1,4 +1,5 @@
 
+
 /**
  * Lista documentos da URL, edita um por vez
  * @param url
@@ -8,16 +9,28 @@ function MasterDetailController(url, ModelClass, settings) {
 
     var self = this;
     settings = $.extend({
-        key: 'id',
-        autoLoad: true
+        key:'id',
+        autoLoad:true,
+        filter:{}
     }, settings);
 
+    self.filter = ko.observable(settings.filter);
+    self.filter.subscribe(function (filter) {
+        self.refresh();
+    });
+
+    if(undefined != settings.onsave) {
+        this.onsave = settings.onsave;
+    }
+    else {
+        this.onsave = null;
+    }
 
     this.data = ko.observableArray();
     this.current = ko.observable(false);
 
-    this.setCurrent = function(data) {
-        if(undefined == data) {
+    this.setCurrent = function (data) {
+        if (undefined == data) {
             data = {};
         }
 
@@ -25,7 +38,7 @@ function MasterDetailController(url, ModelClass, settings) {
         self.current(self.model(data));
     };
 
-    this.model = function(data) {
+    this.model = function (data) {
         var model = new ModelClass(data);
         model.save = self.save;
         model.close = self.close;
@@ -33,24 +46,28 @@ function MasterDetailController(url, ModelClass, settings) {
         return model;
     };
 
-    this.create = function() {
+    this.create = function () {
         self.setCurrent({});
     };
 
     this.load = function (id, success, error) {
+        if(typeof(id) == 'object') {
+            id = ko.utils.unwrapObservable(id.id);
+        }
+
         $.ajax({
-            url: url + '/' + id,
+            url:url + '/' + id,
             success:function (data) {
                 var model = new ModelClass(data);
 
                 self.setCurrent(data);
 
-                if(typeof(success) == 'function') {
+                if (typeof(success) == 'function') {
                     success(model);
                 }
             },
             error:function (e, text) {
-                if(undefined != error) {
+                if (undefined != error) {
                     error(e.responseText);
                 }
                 else {
@@ -63,21 +80,21 @@ function MasterDetailController(url, ModelClass, settings) {
 
     this.save = function (model, success) {
 
-        if(undefined == model) {
+        if (undefined == model) {
             model = self.current();
         }
 
         var id = ko.utils.unwrapObservable(model[settings.key]);
 
-        if(id) {
+        if (id) {
             $.ajax({
-                url: url + '/' + id,
-                type: 'PUT',
-                dataType: 'json',
+                url:url + '/' + id,
+                type:'PUT',
+                dataType:'json',
                 data:ko.toJSON(model),
                 success:function (data) {
-                    if(typeof(settings.onsave) == 'function') {
-                        settings.onsave(data);
+                    if (typeof(self.onsave) == 'function') {
+                        self.onsave(data);
                     }
                 },
                 error:function (e, text) {
@@ -89,19 +106,19 @@ function MasterDetailController(url, ModelClass, settings) {
         }
         else {
             $.ajax({
-                url: url,
+                url:url,
                 dataType:'json',
                 type:'POST',
                 data:ko.toJSON(model),
                 success:function (data) {
-                    $.each(data, function(k, v) {
-                        if(typeof(model[k]) == 'function') {
+                    $.each(data, function (k, v) {
+                        if (typeof(model[k]) == 'function') {
                             model[k](v);
                         }
                     });
 
-                    if(typeof(settings.onsave) == 'function') {
-                        settings.onsave(ko.toJS(model));
+                    if (typeof(self.onsave) == 'function') {
+                        self.onsave(ko.toJS(model));
                     }
 
                 },
@@ -112,7 +129,7 @@ function MasterDetailController(url, ModelClass, settings) {
         }
     };
 
-    this.close = function() {
+    this.close = function () {
         // TODO check if changed
         self.current(null);
     };
@@ -120,16 +137,23 @@ function MasterDetailController(url, ModelClass, settings) {
     // TODO incluir paginação
     this.refresh = function (success, error) {
         $.ajax({
-            url: url,
+            url:url,
             dataType:'json',
+            type:'GET',
+            data:self.filter(),
             success:function (data) {
-                self.data(data);
-                if(undefined != success) {
+                self.data.removeAll();
+
+                $.each(data, function(i, e) {
+                    self.data.push(self.model(e));
+                });
+
+                if (undefined != success) {
                     success(data);
                 }
             },
             error:function (e, text) {
-                if(undefined != error) {
+                if (undefined != error) {
                     error(e.responseText());
                 }
                 else {
@@ -140,7 +164,7 @@ function MasterDetailController(url, ModelClass, settings) {
     };
 
 
-    if(settings.autoLoad) {
+    if (settings.autoLoad) {
         this.refresh();
     }
 }

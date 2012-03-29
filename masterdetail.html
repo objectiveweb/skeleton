@@ -7,7 +7,7 @@
         <div class="container page">
             <div class="page-header">
                 <div style="float:right;">
-                    <button class="btn btn-success" data-bind="click: create">Novo</button>
+                    <button class="btn btn-success" data-bind="click: create">New Entry</button>
                 </div>
                 <h1>My Table
                     <small></small>
@@ -29,7 +29,7 @@
                     <td data-bind="text: id">99</td>
                     <td data-bind="text: name">User Name</td>
                     <td data-bind="text: email">user@email.com</td>
-                    <td><a href="#" data-bind="click: function () { $parent.load(id) }"
+                    <td><a href="#" data-bind="click: $parent.load"
                            class="btn btn-small btn-info">Editar</a></td>
                 </tr>
                 </tbody>
@@ -90,11 +90,11 @@
 
         function MasterDetailModel() {
             var self = this;
-            var onsave = function() {
+            this.mytable = new MasterDetailController('../objectiveweb/index.php/mytable', MyTableEntry);
+            this.mytable.onsave =function() {
                 self.mytable.refresh();
                 self.mytable.close();
             };
-            this.mytable = new MasterDetailController('../objectiveweb/index.php/mytable', MyTableEntry, { onsave: onsave });
         }
     });
 

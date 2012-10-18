@@ -3,14 +3,16 @@
 <head>
 
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <title>Skeleton App</title>
     <link rel="stylesheet" href="../objectiveweb/console/css/metaproject.css"/>
 
     <script type="text/javascript" src="../objectiveweb/console/js/jquery.min.js"></script>
     <script type="text/javascript" src="../objectiveweb/console/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="../objectiveweb/console/js/bootstrap-dropdown.js"></script>
-    <script type="text/javascript" src="../objectiveweb/console/js/bootstrap-tab.js"></script>
     <script type="text/javascript" src="../objectiveweb/console/js/modernizr.js"></script>
-    <script type="text/javascript" src="../objectiveweb/console/js/knockout-2.0.0.js"></script>
+    <script type="text/javascript" src="../objectiveweb/console/js/knockout-2.1.0.js"></script>
+    <script type="text/javascript" src="../objectiveweb/console/js/knockout.mapping-latest.js"></script>
+
     <script type="text/javascript" src="../objectiveweb/console/js/metaproject.js"></script>
 </head>
 
@@ -20,18 +22,51 @@
         <div class="container">
             <a class="brand" href="#">Skeleton App</a>
             <ul class="nav">
-
+				<li><a href="#masterdetail">Master Detail</a></li>
             </ul>
         </div>
     </div>
 </header>
 
-<div id="main-content" data-bind="include: 'masterdetail.html'">
+<div id="main-content" data-bind="html: current_module">
 
 </div>
 
+<div id="main" class="hide">
+	<p>Welcome to the Objectiveweb Skeleton App.</p>
+</div>
+
 <script type="text/javascript">
-    ko.applyBindings({});
+	jQuery(function($) {
+		var routes = {
+			'/' : '#main',
+			'masterdetail' : 'masterdetail.html'
+		};
+
+
+        var app = window.app = new metaproject.Application(
+                {
+                    init:function () {
+                        // runs on app initialization (check for auth, etc)
+                    },
+                    current_module: metaproject.Loader(routes)
+                }
+        );
+
+
+		app.run();
+
+        $(window).on('hashchange',function (e) {
+            var params = window.location.hash.substr(1);
+            window.app.current_module.load(params);
+            // console.log(params);
+            $('.navbar li.active').removeClass('active');
+            var myli = $('.navbar a[href=' + window.location.hash + ']').parent('li');
+            myli.addClass('active');
+            myli.parent('ul').parent('li').addClass('active');
+        }).trigger('hashchange');
+
+	});
 </script>
 </body>
 </html>

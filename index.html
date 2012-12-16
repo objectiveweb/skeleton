@@ -1,72 +1,72 @@
 <!doctype html>
 <html>
 <head>
-
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=8" />
     <title>Skeleton App</title>
-    <link rel="stylesheet" href="../objectiveweb/console/css/metaproject.css"/>
-
-    <script type="text/javascript" src="../objectiveweb/console/js/jquery.min.js"></script>
-    <script type="text/javascript" src="../objectiveweb/console/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="../objectiveweb/console/js/modernizr.js"></script>
-    <script type="text/javascript" src="../objectiveweb/console/js/knockout-2.1.0.js"></script>
-    <script type="text/javascript" src="../objectiveweb/console/js/knockout.mapping-latest.js"></script>
-
-    <script type="text/javascript" src="../objectiveweb/console/js/metaproject.js"></script>
+    <link rel="stylesheet" href="../objectiveweb/console/libs/metaproject/css/metaproject.css"/>
+    <link rel="stylesheet" href="style.css"/>
 </head>
 
-<body class="light-gray with-header">
+<body class="with-header">
+
+<!-- The main application view -->
+<section id="page-content">
 <header class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="brand" href="#">Skeleton App</a>
-            <ul class="nav">
-				<li><a href="#masterdetail">Master Detail</a></li>
-            </ul>
+    <nav class="navbar-inner">
+        <div class="container-fluid main-menu">
+            <div class="pull-right user-menu"></div>
+            <div class="pull-right notification-area"></div>
+            <a class="brand" href="#/">Skeleton</a>
         </div>
-    </div>
+    </nav>
 </header>
 
-<div id="main-content" data-bind="html: current_module">
 
+<div id="main-content" class="container-fluid appcontent">
+    <!-- This is the main .appcontent div, where we usually plug our UrlControllers -->
 </div>
 
-<div id="main" class="hide">
-	<p>Welcome to the Objectiveweb Skeleton App.</p>
-</div>
+</section>
 
-<script type="text/javascript">
-	jQuery(function($) {
-		var routes = {
-			'/' : '#main',
-			'masterdetail' : 'masterdetail.html'
-		};
+<!-- overlays are appended here -->
+<section class="overlays">
+
+</section>
+
+<script src="../objectiveweb/console/libs/underscore/underscore-1.3.3.js" type="text/javascript" charset="utf-8"></script>
+<script src="../objectiveweb/console/libs/signals/signals.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../objectiveweb/console/libs/crossroads/crossroads.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../objectiveweb/console/libs/hasher/hasher.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../objectiveweb/console/libs/pubsub/pubsub-20120708.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- metaproject -->
+<script type="text/javascript" src="../objectiveweb/console/libs/jquery/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="../objectiveweb/console/libs/jquery/jquery-ui-1.9.1.custom.min.js"></script>
+
+<script src="../objectiveweb/console/libs/flot/jquery.flot.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../objectiveweb/console/libs/flot/jquery.flot.resize.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript" src="../objectiveweb/console/libs/metaproject/modernizr.js"></script>
+<script type="text/javascript" src="../objectiveweb/console/libs/metaproject/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="../objectiveweb/console/libs/knockout/knockout-2.2.0.js"></script>
+<script type="text/javascript" src="../objectiveweb/console/libs/knockout/knockout-postbox.min.js"></script>
+<script type="text/javascript" src="../objectiveweb/console/libs/knockout/knockout.mapping-latest.js" charset="utf-8"></script>
+
+<script type="text/javascript" src="../objectiveweb/console/libs/metaproject/metaproject.js"></script>
+<script type="text/javascript" src="../objectiveweb/console/libs/metaproject/metaproject.datepicker.js"></script>
+<script type="text/javascript" src="../objectiveweb/console/libs/metaproject/metaproject.fileupload.js"></script>
+<script type="text/javascript" src="../objectiveweb/console/libs/metaproject/metaproject.maskinput.js"></script>
+<script type="text/javascript" src="../objectiveweb/console/libs/metaproject/metaproject.ui.js"></script>
+
+<script type="text/javascript" src="../objectiveweb/console/libs/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="../objectiveweb/console/libs/metaproject/metaproject.tinymce.js"></script>
+<!-- /metaproject -->
 
 
-        var app = window.app = new metaproject.Application(
-                {
-                    init:function () {
-                        // runs on app initialization (check for auth, etc)
-                    },
-                    current_module: metaproject.Loader(routes)
-                }
-        );
+<script src="../objectiveweb/console/libs/boilerplate/groundwork.js" type="text/javascript" charset="utf-8"></script>
 
 
-		app.run();
-
-        $(window).on('hashchange',function (e) {
-            var params = window.location.hash.substr(1);
-            window.app.current_module.load(params);
-            // console.log(params);
-            $('.navbar li.active').removeClass('active');
-            var myli = $('.navbar a[href=' + window.location.hash + ']').parent('li');
-            myli.addClass('active');
-            myli.parent('ul').parent('li').addClass('active');
-        }).trigger('hashchange');
-
-	});
-</script>
+<script type="text/javascript" data-main="src/main" src="../objectiveweb/console/libs/require/require.js"></script>
 </body>
 </html>

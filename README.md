@@ -16,3 +16,8 @@ The database schema is defined on the skeleton.sql file and should be imported o
     register_app('skeleton');
 
 That's it, visit http://your_server/skeleton and enjoy.
+
+# Implemented Components
+
+* Contacts list, using metaproject's GridComponent
+* A Contact Component, to edit Contacts

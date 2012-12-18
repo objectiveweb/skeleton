@@ -1,0 +1,59 @@
+<ul class="breadcrumb affix">
+    <li class="pull-right btn-toolbar">
+
+        <!-- ko if: model() && model().id() -->
+        <div class="btn-group">
+            <button data-bind="click: del" data-close="true" data-confirm="Are you sure ?" class="btn btn-mini btn-danger"><i
+                    class="icon-trash"></i>
+                Delete
+            </button>
+        </div>
+        <!-- /ko -->
+
+        <div class="btn-group">
+            <button data-bind="click: save" data-close="true" class="btn btn-mini btn-primary"><i class="icon-save"></i>
+                Save
+            </button>
+            <!--button class="btn btn-mini btn-primary dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#" data-bind="click: save" data-close="true">Gravar e fechar</a></li>
+            </ul-->
+        </div>
+    </li>
+    <li><a href="#" data-bind="click: close">Contacts</a> <span class="divider">/</span></li>
+    <li class="active" data-bind="text: model() && (model().name() ? model().name() : 'New Contact')">Contact
+        name
+    </li>
+
+</ul>
+
+<div class="form-horizontal" data-bind="with: model">
+
+    <div class="control-group">
+        <label class="control-label" for="mytable-name">Name</label>
+
+        <div class="controls">
+            <input type="text" class="" id="mytable-name"
+                   data-bind="value: name, disable: id">
+
+            <p class="help-block">User name (can't be changed).</p>
+        </div>
+
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="mytable-email">Email</label>
+
+        <div class="controls">
+            <input type="text" class="" id="mytable-email"
+                   data-bind="value: email">
+
+            <p class="help-block">User Email Address.</p>
+        </div>
+
+    </div>
+
+</div>
+<!-- TODO add a modal somewhere -->

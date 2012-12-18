@@ -8,7 +8,8 @@ define(function (require) {
      */
 
     return [
-        require('./baseModule/module')
+        require('./baseModule/module'),
+        require('./sample/module')
     ];
 
 });

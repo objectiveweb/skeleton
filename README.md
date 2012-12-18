@@ -1,7 +1,13 @@
 # Objectiveweb Skeleton App
 
-This project will eventually become a full featured Objectiveweb application example, and may serve as a base for other applications.
-For now, this is a rough MasterDetail implementation, which uses a custom javascript controller and the Metaproject interface for displaying data.
+The Skeleton App is a full featured Objectiveweb application example, which
+presents a collection of recipes and best practices for applications
+development using Objectiveweb. The application structure follows the
+[Boilerplatejs Reference Architecture](http://boilerplatejs.org), just like
+the Objectiveweb console.
+
+There is a list of implemented modules below, which for now showcases a
+basic CRUD application.
 
 # Instalation
 
@@ -17,7 +23,15 @@ The database schema is defined on the skeleton.sql file and should be imported o
 
 That's it, visit http://your_server/skeleton and enjoy.
 
-# Implemented Components
+# Implemented Modules
 
-* Contacts list, using metaproject's GridComponent
-* A Contact Component, to edit Contacts
+## baseModule
+
+* Landing Page
+* Main menu
+
+## sample
+
+* Contacts list, reusing metaproject's GridComponent from the Objectiveweb distro
+* Module-specific menu, which gets appended to the app interface
+* A Contact Editor Component

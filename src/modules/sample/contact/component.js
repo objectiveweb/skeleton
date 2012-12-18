@@ -1,23 +1,12 @@
-define(['Boiler', './viewmodel', 'text!./view.html'], function(Boiler, ViewModel, template) {
+define(['Boiler', '../models', './viewmodel', 'text!./view.html'], function(Boiler, models, ViewModel, template) {
 
-    var Contact = metaproject.Model({
-        id: null,
-        name: null,
-        email: null
-    });
-
-
-    Contact.prototype.incluirAnimal = function(animal) {
-        this.animais.push(new Animal(animal));
-    };
+    var ds = new metaproject.DataSource('../objectiveweb/index.php/contact', { model: models.Contact });
 
 	var Component = function(moduleContext) {
 
 		var vm, panel = null, context = new Boiler.Context(moduleContext);
 
-        this.dataSource = new metaproject.DataSource('../objectiveweb/index.php/contact', { model: Contact });
-
-        context.ds = this.dataSource;
+        context.ds = this.dataSource = ds;
 
 		this.activate = function(parent, params) {
 			if (!panel) {
@@ -29,7 +18,7 @@ define(['Boiler', './viewmodel', 'text!./view.html'], function(Boiler, ViewModel
             vm.load(params.id);
 			panel.show();
 			
-		}
+		};
 
 		this.deactivate = function() {
 			if(panel) {

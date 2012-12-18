@@ -32,6 +32,7 @@ That's it, visit http://your_server/skeleton and enjoy.
 
 ## sample
 
+* Contact model
 * Contacts list, reusing metaproject's GridComponent from the Objectiveweb distro
 * Module-specific menu, which gets appended to the app interface
-* A Contact Editor Component
+* An Editor Component for contacts, which exposes the contacts DataSource

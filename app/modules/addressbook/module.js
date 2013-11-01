@@ -1,23 +1,27 @@
-define(['Boiler', './mainMenu/component', './contact/component', '../../../../objectiveweb/console/libs/metaproject/components/grid/component' ],
-    function (Boiler, MainMenuComponent, ContactComponent, GridComponent) {
-
-        var Module = function (globalContext) {
-            var context = new Boiler.Context(globalContext),
+/*global require:true, ko: true */
+define(function(require) {
+    "use strict";
+    
+    // This module's dependencies
+    var Boiler = require('Boiler'),
+        MainMenuComponent = require('./mainMenu/component'),
+        ContactComponent = require('./contact/component'),
+        GridComponent = require('objectiveweb/console/libs/metaproject/components/grid/component'),
+        models = require('./models');
+        
+    return {
+        initialize: function (context) {
+            
+            // Instantiate dependencies
+            var menuComponent = new MainMenuComponent(context),
                 contactComponent = new ContactComponent(context);
 
-
-            //scoped DomController that will be effective only on $('#page-content')
-            var controller = new Boiler.DomController($('#page-content'));
-            //add routes with DOM node selector queries and relevant components
-            controller.addRoutes({
-                ".main-menu":new MainMenuComponent(context)
-            });
-            controller.start();
-
-            //the landing page should respond to the root URL, so let's use an URLController too
-            var controller = new Boiler.UrlController($(".appcontent"));
-            controller.addRoutes({
-                "contacts" :new GridComponent(new contactComponent.dataSource.Nav(), {
+            // Activate the menuComponent on the '.main-menu' element
+            menuComponent.activate($('.main-menu'));
+            
+            // return this module's routes
+            return {
+                "contacts" :new GridComponent(new models.Contact.getDataSource().Nav(), {
                     header:'<div class="page-header">'
                         + '<div class="pull-right">'
                         + '<a class="btn btn-success" href="#/contacts/0">Add new</a>'
@@ -49,10 +53,7 @@ define(['Boiler', './mainMenu/component', './contact/component', '../../../../ob
                     ]
                 }),
                 "contacts/{id}": contactComponent
-            });
-            controller.start();
-        };
-
-        return Module;
-
-    });
+            };
+        }
+    };
+});

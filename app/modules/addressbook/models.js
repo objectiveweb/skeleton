@@ -1,5 +1,6 @@
-/**
- * The models provided by this module
+/*global metaproject: true */
+/*
+ * These are the models provided by this module
  */
 define(function() {
 
@@ -11,7 +12,7 @@ define(function() {
         email: null,
         created: null,
         modified: null
-    });
+    }).bind('../objectiveweb/index.php/contact');
 
     return models;
 });

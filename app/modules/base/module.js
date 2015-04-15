@@ -9,7 +9,7 @@ define(function (require) {
 
     var viewModel = {
         name: 'Skeleton',
-        url: 'http://github.com/bravado/generator-metaproject'
+        url: 'https://github.com/objectiveweb/skeleton'
     };
 
     return {

@@ -11,15 +11,59 @@
     * We use 'require' function from requirejs inside the object to load appropriate core classes
     * from the respective AMD modules.
 	
-	@namespace Boiler.Helpers
+	@namespace Boiler
 	@module BoilerCoreClasses
 	@main BoilerCoreClasses
 	**/
-    return {
+    var Boiler = {
         Context : require("./core/context"),
         DomController : require("./core/dom-controller"),
         UrlController : require("./core/url-controller"),
         ViewTemplate: require("./core/view-template"),
-        Helpers : require ("./core/helpers/_helpers_")
+        Helpers : require ("./core/helpers/_helpers_"),
+        bootstrap: function(selector, modules) {
+            /* In JavaScript, functions can be used similarly to classes in OO programming. Below,
+             * we create an instance of 'Boiler.Context' by calling the 'new' operator. Then add
+             * global settings. These will be propagated to child contexts
+             */
+            var globalContext = new Boiler.Context();
+
+            var controller = new Boiler.UrlController($(selector)),
+                routes = {};
+
+
+            $.each(modules, function(root, module) {
+
+                $.each(module, function(i, Module) {
+
+                    /* In BoilerplateJS, your product module hierachy is associated to a 'Context' hierarchy. Below
+                     * we create the global 'Context' and load child contexts (representing your product sub modules)
+                     * to create a 'Context' tree (product modules as a tree).
+                     */
+                    if(typeof(Module) == 'function') {
+                        var context = new Boiler.Context(globalContext),
+                            paths = new Module(context);
+
+                        if(undefined !== paths) {
+                            $.each(paths, function(j, e) {
+                                routes[(root == '/' ? '' : root)
+                                + (i !== '/' ? (i.charAt(0) == '/' ? i: '/' + i) : '')
+                                + (j !== '/' ? (j.charAt(0) == '/' ? j: '/' + j) : '')] = e;
+                            });
+                        }
+                    }
+                    else {
+                        routes[(root == '/' ? '' : root)
+                        + (i !== '/' ? (i.charAt(0) == '/' ? i: '/' + i) : '')] = Module;
+                    }
+                });
+
+            });
+
+            controller.addRoutes(routes);
+            controller.start();
+        }
     };
+
+    return Boiler;
 });

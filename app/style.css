@@ -1,0 +1,21 @@
+
+.main-header>.navbar {
+    margin-bottom: 0;
+    margin-left: 0px;
+    border: none;
+}
+
+@media (max-width: 767px) {
+    .fixed .content-wrapper, .fixed .right-side {
+
+        padding-top: 50px;
+    }
+
+    .left-side, .main-sidebar {
+        padding-top: 50px!important;
+    }
+}
+
+.example-modal .modal {
+    display: block;
+}

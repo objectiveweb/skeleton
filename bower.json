@@ -1,0 +1,26 @@
+{
+    "name": "skeleton",
+    "version": "0.0.1",
+    "authors": [
+        "Guilherme Barile <gui@bravado.com.br>"
+    ],
+    "description": "Skeleton",
+    "main": "app/main.js",
+    "keywords": [
+    "metaproject",
+		"app"
+    ],
+    "license": "MIT",
+    "homepage": "http://github.com/objectiveweb/skeleton/",
+    "dependencies": {
+        "metaproject": "git://github.com/bravado/metaproject#master",
+        "AdminLTE": "almasaeed2010/AdminLTE#~2.0",
+        "js-signals": "~1.0.0",
+        "hasher": "~1.2.0",
+        "crossroads": "~0.12.0",
+        "underscore": "~1.5.2",
+        "requirejs": "~2",
+        "requirejs-text": "~2",
+        "requirejs-domready": "~2"
+    }
+}

@@ -1,21 +1,29 @@
-define(['Boiler', './landingPage/component', './mainMenu/component'],
-    function (Boiler, LandingPageComponent, MainMenuComponent) {
+/*global define: true, metaproject: true, ko: true, $: true */
+define(function (require) {
+    "use strict";
 
-        var Module = {
-            initialize: function (context) {
-    
-                var menuComponent = new MainMenuComponent(context);
-    
-                // Activate the menuComponent on the '.main-menu' element
-                menuComponent.activate($('.main-menu'));
-    
-                //the landing page should respond to the root URL, so let's use an URLController too
-                return {
-                    "/":new LandingPageComponent(context)
-                };
-            }
-        };
+    // Module dependencies
+    var Boiler = require('Boiler'),
+        models = require('../models'),
+        viewTemplate = require('text!./view.html');
 
-        return Module;
+    var viewModel = {
+        name: 'Skeleton',
+        url: 'http://github.com/bravado/generator-metaproject'
+    };
 
-    });
+    return {
+
+        template: viewTemplate,
+        viewModel: viewModel,
+        activate: function (parent, params) {
+            // called after the template is loaded and viewModel is bound
+
+        },
+        deactivate: function () {
+            // called before hiding this module
+        }
+
+    };
+
+});

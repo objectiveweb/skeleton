@@ -1,4 +1,6 @@
-define([], function() {
+/* global ko: true */
+define(function(require) {
+	
 	/**
 	Mediator is used for handling the messaging inside the framework
  	
@@ -8,11 +10,7 @@ define([], function() {
 	@constructor    
 	**/
 	var Mediator =  function() {
-		/**
-		@private
-		@property {Object} 'pubsub' Holds an instance of PubSub
-		**/
-		var pubsub = new PubSub();
+
 		return{
 			/**
 			Notify others on an occurrence of an event by setting up a publish point with a string
@@ -23,7 +21,7 @@ define([], function() {
 			@param {Array} params
 			**/
 			notify : function(event, params) {
-				pubsub.publish(event, params);
+				ko.postbox.publish(event, params);
 			},
 			/**
 			listen to the events published by others by registering a callback on a named event
@@ -34,7 +32,7 @@ define([], function() {
 			@param {Function} fn Callback function
 			**/
 			listen : function(event, fn) {
-				pubsub.subscribe(event, fn);
+				ko.postbox.subscribe(event, fn);
 			}
 		};
 

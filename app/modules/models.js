@@ -6,14 +6,10 @@ define(function() {
 
     // Example ModelName
 
-    //models.ModelName = metaproject.Model({
-    //    id:null,
-    //    firstName:null,
-    //    lastName:null,
-    //    name:function () {
-    //        return this.firstName() + ' ' + this.lastName();
-    //    }
-    //}).bind('/url');
+    models.Product = metaproject.Model({
+        id: null,
+        description: null
+    }).bind('../objectiveweb/product');
 
     return models;
 });

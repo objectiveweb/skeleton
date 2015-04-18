@@ -12,6 +12,8 @@ define(function (require) {
         url: 'https://github.com/objectiveweb/skeleton'
     };
 
+    $('.sidebar-menu').prepend(require('text!./menu.html'));
+
     return {
 
         template: viewTemplate,

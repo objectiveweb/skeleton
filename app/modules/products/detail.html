@@ -1,17 +1,28 @@
 <section class="content">
     <div class="box" data-bind="with: model">
         <div class="box-header">
-            <h3 class="box-title"></h3>
+            <h3 class="box-title">Product {{ id }}</h3>
             <div class="box-tools pull-right">
 
             </div>
         </div>
         <div class="box-body">
-
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" class="form-control"
+                       value="{{ description }}" placeholder="Enter ...">
+            </div>
         </div>
 
         <div class="box-footer">
-
+            <!-- call viewModel.save() which returns to the products
+                list after a sucessful save -->
+            <button type="submit" class="btn btn-primary"
+                    data-bind="click: $root.save">Save Changes</button>
+            <!-- ko if: id -->
+            <button type="submit" class="btn btn-danger"
+                    data-bind="click: $root.destroy">Delete Product</button>
+            <!-- /ko -->
         </div>
     </div>
 </section>

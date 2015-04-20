@@ -2,10 +2,7 @@
 define(function (require) {
     "use strict";
 
-    // Module dependencies
-    var Boiler = require('Boiler'),
-        models = require('../models');
-
+    // append the sidebar menu
     $('.sidebar-menu').append(require('text!./menu.html'));
 
     return function (context) {

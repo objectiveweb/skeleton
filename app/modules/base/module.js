@@ -4,7 +4,7 @@ define(function (require) {
 
     // Module dependencies
     var Boiler = require('Boiler'),
-        models = require('../models'),
+        menuTemplate = require('text!./menu.html'),
         viewTemplate = require('text!./view.html');
 
     var viewModel = {
@@ -12,20 +12,12 @@ define(function (require) {
         url: 'https://github.com/objectiveweb/skeleton'
     };
 
-    $('.sidebar-menu').prepend(require('text!./menu.html'));
+    $('.sidebar-menu').prepend(menuTemplate);
 
     return {
 
         template: viewTemplate,
-        viewModel: viewModel,
-        activate: function (parent, params) {
-            // called after the template is loaded and viewModel is bound
-
-        },
-        deactivate: function () {
-            // called before hiding this module
-        }
-
+        viewModel: viewModel
     };
 
 });

@@ -3,7 +3,7 @@ Metaproject Skeleton
 
 ## Installing
 
-    git clone https://github.com/objectiveweb/skeleton
+    git clone https://github.com/objectiveweb/skeleton.git
     cd skeleton
     bower install
 

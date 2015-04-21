@@ -18,6 +18,6 @@ to export the current directory on port 8080, then visit
 http://localhost:8080/app/index.html on your browser of choice.
 
 For detailed examples, please check the 
-[Metaproject Generator](https://github.com/objectiveweb/skeleton) and 
-the [Building Skeleton](http://guigouz.github.io/building-skeleton.md)
+[Metaproject Generator](https://github.com/bravado/generator-metaproject)
+ and the [Building Skeleton](http://guigouz.github.io/building-skeleton.md)
 post
